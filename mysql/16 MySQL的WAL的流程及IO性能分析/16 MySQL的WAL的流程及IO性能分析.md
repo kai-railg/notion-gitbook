@@ -1,0 +1,60 @@
+# MySQL的WAL的流程及IO性能分析
+
+- WAL（write ahead logging 先写日志）机制保证了只要 redo log 和 binlog 保证持久化到磁盘，就能确保 MySQL 异常重启后，数据可以恢复。
+- redo log 的写入流程是怎么样的，如何保证 redo log 真实地写入了磁盘。
+- `binlog` 的写入流程
+    - 事务执行过程中，先把`binlog` 写入 binlog cache，事务提交的时候，再写入到binlog 文件。
+    - 一个事务的binlog 是不能拆开的，无论事务有多大，都要保证一次性写入，这就涉及到了binlog cache 的保存问题
+        - 系统给 binlog cache 分配了一块内存，如果binlog 的大小超过了内存，就会暂存到磁盘
+        - 事务提交的时候，执行器把`binlog cache` 里的完整事务写到`binlog`中，并清空`binlog cache`。
+    - 每个线程都有自己的binlog cache，但是共用一份 binlog文件。
+    - 从`binlog cache` 写入到`binlog`的过程分为两步
+        - `write` 写入到文件系统的 page cache，速度比较快，没有写到磁盘
+        - `fsync` 将数据持久化到磁盘
+    - write 和 fsync 的时机，由参数 `sync_binlog` 控制
+        - `sync_binlog` =0，表示每次提交事务只 write，不fsync
+        - `sync_binlog` =1，表示每次提交事务都会 fsync
+        - `sync_binlog` ≥1，表示每次提交事务都会 write，并积累N个事务后才 fsync
+    - 因此，在IO出现瓶颈的情况下，可以将 `sync_binlog`  设置为一个较大的值，可以提交性能。比较常见的是100-1000的某个值。
+    - 对应的风险就是如果主机发生异常重启，会丢失最近N个事务的binlog日志
+- `redo log` 的写入机制
+    - 事务在执行过程中，生成的`redo log` 实现要写到`redo log buffer` 的。
+    - `redo log buffer` 里面的内容，并不需要每次生成后都刷新到磁盘
+    - 如果事务执行期间MySQL发生异常重启，那么事务就不会提交成功，日志也会丢失，所以并不会有损失。
+    - 那么事务`还没提交`的时候，`redo log buffer`  里面的内容也是有可能刷新到磁盘的
+    - redo log 的三种状态
+        - 在 `redo log buffer`  中，就是在MySQL进程内存中
+        - write， 写到文件系统的page cache中
+        - fsync，刷新到磁盘中
+    - redo log 写入的三种策略，针对每次事务提交时的场景
+        - `innodb_flush_log_at_trx_commit` =0，只写入 `redo log buffer`
+        - `innodb_flush_log_at_trx_commit` =1，fsync 到磁盘中
+        - `innodb_flush_log_at_trx_commit` =2，write到 page cache中
+    - InnoDB后台有一个线程，每隔1秒，就会把 redo log buffer 的日志，调用 write 写到文件系统的page cache，再调用 fsync 持久化到磁盘中
+    - 除了后台的线程外，还有两种情况会让`未提交`的事务持久化到磁盘中
+        - redo log buffer 即将达到 innodb_log_buffer_size 的一半，会主动写盘。但是只会write，不会 fsync
+        - 并行的事务提交的时候，会顺便将这个事务的redo log buffer 持久化fsync到磁盘中
+    - 事务提交时的时序是 redo log + prepare + binlog + redo log commit。
+    - 如果设置双1配置，  即`innodb_flush_log_at_trx_commit` =1和`sync_binlog`=1，那么完整的事务提交时需要经历两次刷盘， prepare 和 binlog 阶段各一次。
+    - 意味着每秒的TPS（系统吞吐量）*2才可以保证刷盘，但是MySQL每秒的TPS*1即可
+    - `组提交机制`  针对多并发场景
+        - 首先需要介绍日志逻辑序号（LSN）
+            - LSN是单调递增的，用来对应redo log的一个个写入点，每次写入长度为length的redo log，LSN的值就会加上length
+            - LSN也会写入到数据页中，用来保证数据页`不会多次执行重复的redo log`。
+        - 比如三个并发的事务trx1，trx2，trx3在prepare阶段，都写完redo log buffer，持久化到磁盘时，对应的LSN分别为50，100，150
+            - trx1 是第一个到达的，会被选为这组事务的leader
+            - 等trx1 开始写盘时，发现这组事务已经有三个事务了，LSN也变为150
+            - trx1 写盘时，带的LSN就是150了，因此LSN从50-150的redo log，都会被刷新到磁盘了
+    - 所以，一次组提交里，组员（事务）越多越好，节约磁盘的IOPS效果也越好。
+    - 为了让一次 fsync 带的组员更多，MySQL做了一些优化： 拖时间。从而让binlog也可以实现组提交，不过binlog的write和fsync相隔时间短，导致组员相对较少。
+        - `binlog_group_commit_sync_delay` 表示延迟多少微秒才用fsync
+        - `binlog_group_commit_sync_no_delay_count` 表示累积多少次才用fsync
+    - 因此，WAL机制主要得益两个方面
+        - redo log 和 binlgo 都是顺序写，比随机写效率高
+        - 利用组提交机制，可以大幅降低磁盘的IOPS
+    - 如果MySQL在IO方面出现了性能瓶颈，可以考虑以下三个方法
+        - 设置 `binlog_group_commit_sync_delay` 和 `binlog_group_commit_sync_no_delay_count` 参数，提升组提交的事务数量这个方法是故意设置等待时间，会增加响应的时间。但是没有丢失数据的风险
+        - 将 sysnc_binlog 设置为100-1000，积累足够的事务数量才会写入binlog到磁盘，有丢失数据的风险
+        - `innodb_flush_log_at_trx_commit` =2，写入redo log到 page cache中，这样做在主机掉电的情况下，有丢失数据的风险
+            - 相比较设置为0，文件系统的缓存和MySQL的内存相比相差无几，而且MySQL异常重启的时候不会丢失数据
+    -

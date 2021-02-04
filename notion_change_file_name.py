@@ -3,9 +3,9 @@ import sys
 import shutil
 import zipfile
 
-source_dir_path = "/Users/kai/Downloads/MySQL原理分析"
+source_dir_path = ""
 file_name_order = []
-dir_name = "mysql"
+dir_name = ""
 args = sys.argv[1:]
 if args:
     source_dir_path, dir_name = args[0] or source_dir_path, args[1] or dir_name
@@ -22,6 +22,7 @@ for zip_fn in os.listdir(source_dir_path):
     if not zip_fn.endswith(".zip"):
         continue
     n = len(zip_fn)
+    print(os.path.join(source_dir_path, zip_fn))
     with zipfile.ZipFile(os.path.join(source_dir_path, zip_fn)) as f:
         f.extractall(path=os.path.join(saved_dir_path, zip_fn[0:n - 4]))
     # os.remove(os.path.join(path, zip_fn))

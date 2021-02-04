@@ -1,0 +1,46 @@
+# 2 Plugins
+
+- input Plugins
+    - `stdin`   命令行输入
+    - `file`     文件读取
+        - path    文件路径
+        - 
+    - `syslog`  系统日志
+    - `redis`    缓存处理器
+    - `beats`    日志处理器
+    - `[文档](https://www.elastic.co/guide/en/logstash/7.3/input-plugins.html)`
+- filters
+    - 对Logstash Event 进行各种处理，例如解析、删除字段、类型转换
+    - 常用的过滤器：
+    - `Data`       日期解析
+    - `Dissect`  分隔符解析
+    - `Grok`      正则匹配解析
+    - `drop`      放弃一个Event
+    - `geoip`     地理信息
+    - `Mutate`   处理字段，重命名、删除、替换
+        - Convert   类型转换
+        - Gsub        字符串替换
+        - Split          字符串切割
+        - Join           数组合并字符串
+        - Merge        数组合并数组
+        - Rename     字段重命名
+        - Update       字段内容更新
+        - Replace      字段内容替换
+        - Remove_field  字段删除
+    - `Ruby`       利用Ruby代码动态修改 Event
+- output Plugins
+    - output是 Logstash 管道的最后阶段，一个事件可以通过多个输出。
+    - 一旦输出完毕，就完成该执行
+    - 常用的output Plugins
+    - `elasticsearch`
+    - `file`   文件
+    - `graphite`  石墨
+    - `statsd`
+- codec  编码解码器
+    - 用于输入和输出
+    - `line`  读取一行
+    - `multiline`  读取多行
+        - [`如何处理多行Event`](https://www.elastic.co/guide/en/logstash/7.3/multiline.html)
+    - `rubydebug`  控制台打印
+    - `dots`  控制台打印
+    - `[文档](https://www.elastic.co/guide/en/logstash/7.3/codec-plugins.html)`

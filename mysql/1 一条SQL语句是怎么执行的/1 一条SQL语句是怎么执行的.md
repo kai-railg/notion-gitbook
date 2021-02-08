@@ -1,9 +1,9 @@
-# 一条SQL语句是怎么执行的
+# 1 一条SQL语句是怎么执行的
 
 - 执行过程概述和架构图
     - 架构图
 
-        ![%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled.png](%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled.png)
+        ![1%20%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled.png](1%20%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled.png)
 
     - MySQL可以分为`Server层`和`存储引擎层`。
         - Server层包括连接器、分析器、优化器、执行器等，涵盖大部分的核心功能，以及`内置函数`，所有`跨引擎存储`（存储过程、触发器、视图等）
@@ -16,12 +16,12 @@
                 - 一旦连接建立后，在本次连接中权限就不受其他连接修改的影响，比如管理员修改了该账号的权限
         - 连接建立后，可以通过 `show processlist;` 查看
 
-            ![%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%201.png](%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%201.png)
+            ![1%20%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%201.png](1%20%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%201.png)
 
             - Command为Sleep的连接表示这个是一个空闲连接
             - 空闲到一定时间，系统会自动断开连接。时间由参数`wait_timeout` 设定，默认8小时
 
-                ![%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%202.png](%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%202.png)
+                ![1%20%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%202.png](1%20%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%202.png)
 
         - 长连接和短连接
             - 长连接是指连接成功后，如果客户端持续有请求，则一直使用同一个连接。
@@ -40,7 +40,7 @@
         - 可以通过 query_cache_type 变量设置
             - 必须在启动前设置 query_cache_type 变量
 
-            ![%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%203.png](%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%203.png)
+            ![1%20%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%203.png](1%20%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%20211e2dbb68cf4e7b99d61dfe95d8a6d1/Untitled%203.png)
 
         - 然后显示的执行缓存语句
             - `select SQL_CACHE * from user;`

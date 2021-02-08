@@ -1,4 +1,4 @@
-# SQL和更新和redo log、binlog
+# 2 SQL和更新和redo log、binlog
 
 - redo log
     - redo log
@@ -13,7 +13,7 @@
             - `write pos` 是当前记录的位置，也就是redo log当前结尾的位置
             - 当write pos追上check point时，就得停下来擦除一些内容 check point 向前推进
 
-                ![SQL%E5%92%8C%E6%9B%B4%E6%96%B0%E5%92%8Credo%20log%E3%80%81binlog%20a0f24b3bb42e4ffcbd75107a72af67c7/Untitled.png](SQL%E5%92%8C%E6%9B%B4%E6%96%B0%E5%92%8Credo%20log%E3%80%81binlog%20a0f24b3bb42e4ffcbd75107a72af67c7/Untitled.png)
+                ![2%20SQL%E5%92%8C%E6%9B%B4%E6%96%B0%E5%92%8Credo%20log%E3%80%81binlog%20a0f24b3bb42e4ffcbd75107a72af67c7/Untitled.png](2%20SQL%E5%92%8C%E6%9B%B4%E6%96%B0%E5%92%8Credo%20log%E3%80%81binlog%20a0f24b3bb42e4ffcbd75107a72af67c7/Untitled.png)
 
         - redo log确保了即使数据库发生异常重启，之前提交的记录也不会丢失。
             - 这个能力成为 `crash-safe`
@@ -39,4 +39,4 @@
         - `innodb_flush_log_at_trx_commit` 设置成1，表示每次事务的redo log都会刷新到磁盘
         - `sync_binlog` 设置成1，表示每次事务的binlog都会刷新到磁盘
 
-        ![SQL%E5%92%8C%E6%9B%B4%E6%96%B0%E5%92%8Credo%20log%E3%80%81binlog%20a0f24b3bb42e4ffcbd75107a72af67c7/Untitled%201.png](SQL%E5%92%8C%E6%9B%B4%E6%96%B0%E5%92%8Credo%20log%E3%80%81binlog%20a0f24b3bb42e4ffcbd75107a72af67c7/Untitled%201.png)
+        ![2%20SQL%E5%92%8C%E6%9B%B4%E6%96%B0%E5%92%8Credo%20log%E3%80%81binlog%20a0f24b3bb42e4ffcbd75107a72af67c7/Untitled%201.png](2%20SQL%E5%92%8C%E6%9B%B4%E6%96%B0%E5%92%8Credo%20log%E3%80%81binlog%20a0f24b3bb42e4ffcbd75107a72af67c7/Untitled%201.png)

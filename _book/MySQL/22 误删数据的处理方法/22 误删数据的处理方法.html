@@ -1,0 +1,1200 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>22 误删数据的处理方法 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../23 MySQL的Join/23 MySQL的Join.html" />
+    
+    
+    <link rel="prev" href="../21 主从模式下对主库状态的判断/21 主从模式下对主库状态的判断.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    [MySQL]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../1 一条SQL语句是怎么执行的/1 一条SQL语句是怎么执行的.html">
+            
+                <a href="../1 一条SQL语句是怎么执行的/1 一条SQL语句是怎么执行的.html">
+            
+                    
+                    1 一条SQL语句是怎么执行的
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../2 SQL和更新和redo log、binlog/2 SQL和更新和redo log、binlog.html">
+            
+                <a href="../2 SQL和更新和redo log、binlog/2 SQL和更新和redo log、binlog.html">
+            
+                    
+                    2 SQL和更新和redo log、binlog
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../3 事务/3 事务.html">
+            
+                <a href="../3 事务/3 事务.html">
+            
+                    
+                    3 事务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../4 事务的隔离实现和当前读/4 事务的隔离实现和当前读.html">
+            
+                <a href="../4 事务的隔离实现和当前读/4 事务的隔离实现和当前读.html">
+            
+                    
+                    4 事务的隔离实现和当前读
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../5 锁/5 锁.html">
+            
+                <a href="../5 锁/5 锁.html">
+            
+                    
+                    5 锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../6 索引/6 索引.html">
+            
+                <a href="../6 索引/6 索引.html">
+            
+                    
+                    6 索引
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../7 change buffer/7 change buffer.html">
+            
+                <a href="../7 change buffer/7 change buffer.html">
+            
+                    
+                    7 change buffer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../8 唯一索引和普通索引的选择/8 唯一索引和普通索引的选择.html">
+            
+                <a href="../8 唯一索引和普通索引的选择/8 唯一索引和普通索引的选择.html">
+            
+                    
+                    8 唯一索引和普通索引的选择
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../9 MySQL字符串索引的设计+字典树/9 MySQL字符串索引的设计+字典树.html">
+            
+                <a href="../9 MySQL字符串索引的设计+字典树/9 MySQL字符串索引的设计+字典树.html">
+            
+                    
+                    9 MySQL字符串索引的设计+字典树
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../9 MySQL选择索引的逻辑/9 MySQL选择索引的逻辑.html">
+            
+                <a href="../9 MySQL选择索引的逻辑/9 MySQL选择索引的逻辑.html">
+            
+                    
+                    9 MySQL选择索引的逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="../10 脏页的刷新对性能的影响/10 脏页的刷新对性能的影响.html">
+            
+                <a href="../10 脏页的刷新对性能的影响/10 脏页的刷新对性能的影响.html">
+            
+                    
+                    10 脏页的刷新对性能的影响
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="../11 表的空间回收/11 表的空间回收.html">
+            
+                <a href="../11 表的空间回收/11 表的空间回收.html">
+            
+                    
+                    11 表的空间回收
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.13" data-path="../12 order by 的工作原理/12 order by 的工作原理.html">
+            
+                <a href="../12 order by 的工作原理/12 order by 的工作原理.html">
+            
+                    
+                    12 order by 的工作原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.14" data-path="../13 如果规避不规范的查询/13 如果规避不规范的查询.html">
+            
+                <a href="../13 如果规避不规范的查询/13 如果规避不规范的查询.html">
+            
+                    
+                    13 如果规避不规范的查询
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.15" data-path="../14 幻读+间隙锁/14 幻读+间隙锁.html">
+            
+                <a href="../14 幻读+间隙锁/14 幻读+间隙锁.html">
+            
+                    
+                    14 幻读+间隙锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.16" data-path="../15 MySQL短时提高性能的方法/15 MySQL短时提高性能的方法.html">
+            
+                <a href="../15 MySQL短时提高性能的方法/15 MySQL短时提高性能的方法.html">
+            
+                    
+                    15 MySQL短时提高性能的方法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.17" data-path="../16 MySQL的WAL的流程及IO性能分析/16 MySQL的WAL的流程及IO性能分析.html">
+            
+                <a href="../16 MySQL的WAL的流程及IO性能分析/16 MySQL的WAL的流程及IO性能分析.html">
+            
+                    
+                    16 MySQL的WAL的流程及IO性能分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.18" data-path="../17 MySQL的主备/17 MySQL的主备.html">
+            
+                <a href="../17 MySQL的主备/17 MySQL的主备.html">
+            
+                    
+                    17 MySQL的主备
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.19" data-path="../18 MySQL高可用/18 MySQL高可用.html">
+            
+                <a href="../18 MySQL高可用/18 MySQL高可用.html">
+            
+                    
+                    18 MySQL高可用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.20" data-path="../19 一主多从切换的主备延迟问题/19 一主多从切换的主备延迟问题.html">
+            
+                <a href="../19 一主多从切换的主备延迟问题/19 一主多从切换的主备延迟问题.html">
+            
+                    
+                    19 一主多从切换的主备延迟问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.21" data-path="../20 读写分离下的主备延迟问题/20 读写分离下的主备延迟问题.html">
+            
+                <a href="../20 读写分离下的主备延迟问题/20 读写分离下的主备延迟问题.html">
+            
+                    
+                    20 读写分离下的主备延迟问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.22" data-path="../21 主从模式下对主库状态的判断/21 主从模式下对主库状态的判断.html">
+            
+                <a href="../21 主从模式下对主库状态的判断/21 主从模式下对主库状态的判断.html">
+            
+                    
+                    21 主从模式下对主库状态的判断
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.23" data-path="22 误删数据的处理方法.html">
+            
+                <a href="22 误删数据的处理方法.html">
+            
+                    
+                    22 误删数据的处理方法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.24" data-path="../23 MySQL的Join/23 MySQL的Join.html">
+            
+                <a href="../23 MySQL的Join/23 MySQL的Join.html">
+            
+                    
+                    23 MySQL的Join
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.25" data-path="../24 分库分表和临时表/24 分库分表和临时表.html">
+            
+                <a href="../24 分库分表和临时表/24 分库分表和临时表.html">
+            
+                    
+                    24 分库分表和临时表
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    [ElasticSearch]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../ElasticSearch/1 ES的基本概念/1 ES的基本概念.html">
+            
+                <a href="../../ElasticSearch/1 ES的基本概念/1 ES的基本概念.html">
+            
+                    
+                    1 ES的基本概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../ElasticSearch/2 ES的CURD/2 ES的CURD.html">
+            
+                <a href="../../ElasticSearch/2 ES的CURD/2 ES的CURD.html">
+            
+                    
+                    2 ES的CURD
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../ElasticSearch/3 倒排索引/3 倒排索引.html">
+            
+                <a href="../../ElasticSearch/3 倒排索引/3 倒排索引.html">
+            
+                    
+                    3 倒排索引
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../ElasticSearch/4 analyzer/4 analyzer.html">
+            
+                <a href="../../ElasticSearch/4 analyzer/4 analyzer.html">
+            
+                    
+                    4 analyzer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../../ElasticSearch/5 Search API/5 Search API.html">
+            
+                <a href="../../ElasticSearch/5 Search API/5 Search API.html">
+            
+                    
+                    5 Search API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../../ElasticSearch/6 Mapping/6 Mapping.html">
+            
+                <a href="../../ElasticSearch/6 Mapping/6 Mapping.html">
+            
+                    
+                    6 Mapping
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../../ElasticSearch/7 深入搜索/7 深入搜索.html">
+            
+                <a href="../../ElasticSearch/7 深入搜索/7 深入搜索.html">
+            
+                    
+                    7 深入搜索
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../../ElasticSearch/8 集群分布式模型/8 集群分布式模型.html">
+            
+                <a href="../../ElasticSearch/8 集群分布式模型/8 集群分布式模型.html">
+            
+                    
+                    8 集群分布式模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    [Logstash]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../Logstash/1 配置/1 配置.html">
+            
+                <a href="../../Logstash/1 配置/1 配置.html">
+            
+                    
+                    1 配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../Logstash/2 Plugins/2 Plugins.html">
+            
+                <a href="../../Logstash/2 Plugins/2 Plugins.html">
+            
+                    
+                    2 Plugins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../Logstash/3 实例/3 实例.html">
+            
+                <a href="../../Logstash/3 实例/3 实例.html">
+            
+                    
+                    3 实例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../Logstash/4 数据持久化/4 数据持久化.html">
+            
+                <a href="../../Logstash/4 数据持久化/4 数据持久化.html">
+            
+                    
+                    4 数据持久化
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../Logstash/5 Filebeat/5 Filebeat.html">
+            
+                <a href="../../Logstash/5 Filebeat/5 Filebeat.html">
+            
+                    
+                    5 Filebeat
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    [Zookeeper]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../Zookeeper/1 Zookeeper 主要为了解决什么问题/1 Zookeeper 主要为了解决什么问题.html">
+            
+                <a href="../../Zookeeper/1 Zookeeper 主要为了解决什么问题/1 Zookeeper 主要为了解决什么问题.html">
+            
+                    
+                    1 Zookeeper 主要为了解决什么问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../Zookeeper/2 Zookeeper 实现原理/2 Zookeeper 实现原理.html">
+            
+                <a href="../../Zookeeper/2 Zookeeper 实现原理/2 Zookeeper 实现原理.html">
+            
+                    
+                    2 Zookeeper 实现原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../Zookeeper/3 Zookeeper 使用案例/3 Zookeeper 使用案例.html">
+            
+                <a href="../../Zookeeper/3 Zookeeper 使用案例/3 Zookeeper 使用案例.html">
+            
+                    
+                    3 Zookeeper 使用案例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../../Zookeeper/4 Zookeeper 使用文档/4 Zookeeper 使用文档.html">
+            
+                <a href="../../Zookeeper/4 Zookeeper 使用文档/4 Zookeeper 使用文档.html">
+            
+                    
+                    4 Zookeeper 使用文档
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../../Zookeeper/5 Paxos 与 Raft的分析/5 Paxos 与 Raft的分析.html">
+            
+                <a href="../../Zookeeper/5 Paxos 与 Raft的分析/5 Paxos 与 Raft的分析.html">
+            
+                    
+                    5 Paxos 与 Raft的分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../../Zookeeper/6 Zookeeper 的局限/6 Zookeeper 的局限.html">
+            
+                <a href="../../Zookeeper/6 Zookeeper 的局限/6 Zookeeper 的局限.html">
+            
+                    
+                    6 Zookeeper 的局限
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    [iptables]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../iptables/1 概述/1 概述.html">
+            
+                <a href="../../iptables/1 概述/1 概述.html">
+            
+                    
+                    1 概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../iptables/2 四表五链/2 四表五链.html">
+            
+                <a href="../../iptables/2 四表五链/2 四表五链.html">
+            
+                    
+                    2 四表五链
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../../iptables/3 语法/3 语法.html">
+            
+                <a href="../../iptables/3 语法/3 语法.html">
+            
+                    
+                    3 语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../../iptables/4 语法示例/4 语法示例.html">
+            
+                <a href="../../iptables/4 语法示例/4 语法示例.html">
+            
+                    
+                    4 语法示例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../../iptables/5 其他命令/5 其他命令.html">
+            
+                <a href="../../iptables/5 其他命令/5 其他命令.html">
+            
+                    
+                    5 其他命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../../iptables/6 文档资料/6 文档资料.html">
+            
+                <a href="../../iptables/6 文档资料/6 文档资料.html">
+            
+                    
+                    6 文档资料
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <span>
+            
+                    
+                    [ansible]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../ansible/1 简介/1 简介.html">
+            
+                <a href="../../ansible/1 简介/1 简介.html">
+            
+                    
+                    1 简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../ansible/2 特点和架构/2 特点和架构.html">
+            
+                <a href="../../ansible/2 特点和架构/2 特点和架构.html">
+            
+                    
+                    2 特点和架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../../ansible/3 常用命令/3 常用命令.html">
+            
+                <a href="../../ansible/3 常用命令/3 常用命令.html">
+            
+                    
+                    3 常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../../ansible/4 配置文件/4 配置文件.html">
+            
+                <a href="../../ansible/4 配置文件/4 配置文件.html">
+            
+                    
+                    4 配置文件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="../../ansible/5 常用模块/5 常用模块.html">
+            
+                <a href="../../ansible/5 常用模块/5 常用模块.html">
+            
+                    
+                    5 常用模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="../../ansible/6 playbooks/6 playbooks.html">
+            
+                <a href="../../ansible/6 playbooks/6 playbooks.html">
+            
+                    
+                    6 playbooks
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" >
+            
+                <span>
+            
+                    
+                    [Puppet]
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../Puppet/1 概述/1 概述.html">
+            
+                <a href="../../Puppet/1 概述/1 概述.html">
+            
+                    
+                    1 概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../Puppet/2 语法/2 语法.html">
+            
+                <a href="../../Puppet/2 语法/2 语法.html">
+            
+                    
+                    2 语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../../Puppet/3 命令/3 命令.html">
+            
+                <a href="../../Puppet/3 命令/3 命令.html">
+            
+                    
+                    3 命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../../Puppet/4 目录结构/4 目录结构.html">
+            
+                <a href="../../Puppet/4 目录结构/4 目录结构.html">
+            
+                    
+                    4 目录结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="../../Puppet/5 模块/5 模块.html">
+            
+                <a href="../../Puppet/5 模块/5 模块.html">
+            
+                    
+                    5 模块
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >22 误删数据的处理方法</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x8BEF;&#x5220;&#x6570;&#x636E;&#x7684;&#x5904;&#x7406;&#x65B9;&#x6CD5;">&#x8BEF;&#x5220;&#x6570;&#x636E;&#x7684;&#x5904;&#x7406;&#x65B9;&#x6CD5;</h1>
+<ul>
+<li>&#x4F20;&#x7EDF;&#x7684;&#x9AD8;&#x53EF;&#x7528;&#x662F;&#x4E0D;&#x80FD;&#x9632;&#x6B62;&#x8BEF;&#x5220;&#x6570;&#x636E;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x4E3B;&#x5E93;&#x7684;drop table &#x547D;&#x4EE4;&#xFF0C;&#x6216;&#x901A;&#x8FC7;binlog&#x4F20;&#x7ED9;&#x5176;&#x4ED6;&#x5907;&#x5E93;&#xFF0C;&#x8FDB;&#x800C;&#x5BFC;&#x81F4;&#x6574;&#x4E2A;&#x96C6;&#x7FA4;&#x90FD;&#x4F1A;&#x6267;&#x884C;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;</li>
+<li>&#x672C;&#x6587;&#x4E3B;&#x8981;&#x4ECB;&#x7ECD;&#x8BEF;&#x5220;&#x6570;&#x636E;&#x7684;&#x5206;&#x7C7B;&#x4EE5;&#x53CA;&#x5E94;&#x5BF9;&#x65B9;&#x6CD5;</li>
+<li>MySQL&#x8BEF;&#x5220;&#x6570;&#x636E;&#x7684;&#x5206;&#x7C7B;<ul>
+<li>&#x4F7F;&#x7528;delete &#x8BEF;&#x5220;&#x884C;</li>
+<li>&#x4F7F;&#x7528; drop table &#x6216; truncate table &#x8BEF;&#x5220;&#x8868;</li>
+<li>&#x4F7F;&#x7528; drop database &#x8BEF;&#x5220;&#x5E93;</li>
+<li>&#x4F7F;&#x7528; rm  &#x8BEF;&#x5220;&#x5B9E;&#x4F8B;</li>
+</ul>
+</li>
+<li><strong>&#x8BEF;&#x5220;&#x884C;</strong><ul>
+<li>&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>flashback</code> &#x5DE5;&#x5177;&#x901A;&#x8FC7;<code>&#x95EA;&#x56DE;</code>&#x628A;&#x6570;&#x636E;&#x6062;&#x590D;&#x56DE;&#x6765;</li>
+<li>flashback &#x6062;&#x590D;&#x6570;&#x636E;&#x7684;&#x539F;&#x7406;&#xFF0C;&#x662F;&#x4FEE;&#x6539;binlog&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x62FF;&#x56DE;&#x6570;&#x636E;&#x5E93;&#x91CD;&#x653E;&#x3002;<ul>
+<li>&#x524D;&#x63D0;&#x662F;&#x9700;&#x8981;&#x5F00;&#x542F; <code>binlog_format=row</code> &#x548C; <code>binlog_row_image=FULL</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>&#x8BEF;&#x5220;&#x8868;/&#x5E93;</strong><ul>
+<li>&#x9700;&#x8981;&#x4F7F;&#x7528;<code>&#x5168;&#x91CF;&#x5907;&#x4EFD;+&#x589E;&#x91CF;&#x65E5;&#x5FD7;</code>&#x7684;&#x65B9;&#x5F0F;&#x3002;&#x8FD9;&#x4E2A;&#x65B9;&#x6848;&#x8981;&#x6C42;&#x7EBF;&#x4E0A;&#x6709;&#x5B9A;&#x671F;&#x7684;&#x5168;&#x91CF;&#x5907;&#x4EFD;&#xFF0C;&#x5E76;&#x4E14;&#x5B9E;&#x65F6;&#x5907;&#x4EFD;binlog</li>
+<li>&#x5728;&#x8FD9;&#x4E24;&#x4E2A;&#x6761;&#x4EF6;&#x90FD;&#x5177;&#x5907;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6062;&#x590D;&#x6570;&#x636E;&#x7684;&#x6D41;&#x7A0B;&#x5982;&#x4E0B;<ul>
+<li>&#x53BB;&#x6700;&#x8FD1;&#x7684;&#x4E00;&#x6B21;&#x5168;&#x91CF;&#x5907;&#x4EFD;</li>
+<li>&#x7528;&#x5907;&#x4EFD;&#x6062;&#x590D;&#x51FA;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x5E93;</li>
+<li>&#x4ECE;&#x65E5;&#x5FD7;&#x5907;&#x4EFD;&#x53D6;&#x51FA;&#x5168;&#x91CF;&#x5907;&#x4EFD;&#x65F6;&#x95F4;&#x70B9;&#x4E4B;&#x540E;&#x7684;&#x65E5;&#x5FD7;</li>
+<li>&#x628A;&#x8FD9;&#x4E9B;&#x65E5;&#x5FD7;&#xFF0C;&#x9664;&#x4E86;&#x8BEF;&#x5220;&#x6570;&#x636E;&#x7684;&#x8BED;&#x53E5;&#x5916;&#xFF0C;&#x5168;&#x90E8;&#x7528;&#x5230;&#x4E34;&#x65F6;&#x5E93;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>&#x5EF6;&#x8FDF;&#x590D;&#x5236;&#x5907;&#x5E93;</strong><ul>
+<li>&#x5982;&#x679C;&#x6709;&#x975E;&#x5E38;&#x6838;&#x5FC3;&#x7684;&#x4E1A;&#x52A1;&#xFF0C;&#x4E0D;&#x5141;&#x8BB8;&#x592A;&#x957F;&#x7684;&#x6062;&#x590D;&#x65F6;&#x95F4;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x642D;&#x5EFA;<code>&#x5EF6;&#x8FDF;&#x590D;&#x5236;&#x7684;&#x5907;&#x5E93;</code></li>
+<li>&#x5EF6;&#x8FDF;&#x590D;&#x5236;&#x7684;&#x5907;&#x5E93;&#x662F;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x7684;&#x5907;&#x5E93;&#xFF0C;&#x901A;&#x8FC7;<code>CHANGE MASTER TO MASTER_DELAY = N</code>&#xFF0C;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x8DDF;&#x4E3B;&#x5E93;&#x4FDD;&#x6301;N&#x79D2;&#x7684;&#x5EF6;&#x8FDF;</li>
+</ul>
+</li>
+<li><strong>rm &#x5220;&#x9664;MySQL&#x5B9E;&#x4F8B;</strong><ul>
+<li>&#x56E0;&#x4E3A;WAL&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x4ECE;&#x5E93;&#x7684;binlog&#x76F4;&#x63A5;&#x6062;&#x590D;&#xFF0C;&#x6216;&#x8005;&#x5207;&#x6362;&#x4E3B;&#x5907;
+-</li>
+</ul>
+</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../21 主从模式下对主库状态的判断/21 主从模式下对主库状态的判断.html" class="navigation navigation-prev " aria-label="Previous page: 21 主从模式下对主库状态的判断">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../23 MySQL的Join/23 MySQL的Join.html" class="navigation navigation-next " aria-label="Next page: 23 MySQL的Join">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"22 误删数据的处理方法","level":"1.2.23","depth":2,"next":{"title":"23 MySQL的Join","level":"1.2.24","depth":2,"path":"MySQL/23 MySQL的Join/23 MySQL的Join.md","ref":"MySQL/23 MySQL的Join/23 MySQL的Join.md","articles":[]},"previous":{"title":"21 主从模式下对主库状态的判断","level":"1.2.22","depth":2,"path":"MySQL/21 主从模式下对主库状态的判断/21 主从模式下对主库状态的判断.md","ref":"MySQL/21 主从模式下对主库状态的判断/21 主从模式下对主库状态的判断.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"MySQL/22 误删数据的处理方法/22 误删数据的处理方法.md","mtime":"2021-02-08T07:59:55.716Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-08T07:38:57.973Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

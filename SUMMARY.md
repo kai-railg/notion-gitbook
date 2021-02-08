@@ -65,3 +65,9 @@
     * [4 配置文件](ansible/4 配置文件/4 配置文件.md)
     * [5 常用模块](ansible/5 常用模块/5 常用模块.md)
     * [6 playbooks](ansible/6 playbooks/6 playbooks.md)
+* [Puppet]
+    * [1 概述](Puppet/1 概述/1 概述.md)
+    * [2 语法](Puppet/2 语法/2 语法.md)
+    * [3 命令](Puppet/3 命令/3 命令.md)
+    * [4 目录结构](Puppet/4 目录结构/4 目录结构.md)
+    * [5 模块](Puppet/5 模块/5 模块.md)

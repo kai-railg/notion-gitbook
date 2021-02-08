@@ -58,3 +58,10 @@
     * [4 语法示例](iptables/4 语法示例/4 语法示例.md)
     * [5 其他命令](iptables/5 其他命令/5 其他命令.md)
     * [6 文档资料](iptables/6 文档资料/6 文档资料.md)
+* [ansible]
+    * [1 简介](ansible/1 简介/1 简介.md)
+    * [2 特点和架构](ansible/2 特点和架构/2 特点和架构.md)
+    * [3 常用命令](ansible/3 常用命令/3 常用命令.md)
+    * [4 配置文件](ansible/4 配置文件/4 配置文件.md)
+    * [5 常用模块](ansible/5 常用模块/5 常用模块.md)
+    * [6 playbooks](ansible/6 playbooks/6 playbooks.md)

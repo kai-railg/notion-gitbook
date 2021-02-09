@@ -1,0 +1,27 @@
+# 2 docker image
+
+- docker 镜像含有启动文件所需要的文件系统及其内容，因此其用于创建并启动容器
+    - 采用分层构建机制，最底层为 bootfs，其上为 rootfs
+    - bootfs，用于系统引导的文件 系统，包括bootloader和kernel，容器启动完成以后会被卸载以节约内存资源
+    - rootfs，docker容器的跟文件系统
+        - 传统模式中，系统启动之时，内核挂载rootfs时会首先将其挂载为只读模式，完整性自荐完成后挂载为读写模式
+        - docker 中，rootfs由内核挂载为只读模式，而后通过‘`联合挂载`‘技术额外挂载一个读写层
+    - 位于下层的的镜像称为父镜像，最底层的为基础镜像
+    - 最上层的为可读写层，其下的为只读层
+- 制作镜像
+    - `docker commit -p b1` 保存镜像的修改，-p表示制作时暂停容器
+    - `docker build -t user/v1 -f ./Dockerfile`  根据Dockerfile构建镜像
+    - `docker tag 26865d03b2ef user/htppd:v0.1`  打上标签
+    - `docker tag user/htppd:v0.1 user/httpd:latest`  设置多个标签
+- 制作默认镜像
+    - `docker commit -a 'user <user_test@.com>' -c "CMD ['/bin/httpd','-f','-h','/data/html']" -p b1 user/httpd:v0.2`
+- 推送到docker hub
+    - `docker login -u 账号 [server]`
+        - `server` 默认dockerhub
+    - `docker push  账号名/仓库`
+- 阿里云
+    - 阿里云一般有详细步骤
+    - `docker login --username=x registry.cn-shanghai.aliyuncs.com`
+        - 输入密码
+    - docker pull 仓库地址:[版本号]
+    - docker push 仓库地址:[版本号]

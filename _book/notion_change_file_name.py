@@ -58,7 +58,7 @@ rows = [f"* [{dir_name}]\n"]
 for i in range(len(names)):
     # * [第一节 sql](sql/一条SQL语句是怎么执行的.md)
     name = names[i].lstrip("0")
-    row = f"    * [{name}]({dir_name}/{name}/{name + '.md'})\n"
+    row = f"    * {name}({dir_name}/{name}/{name + '.md'})\n"
     print(row)
     rows.append(row)
 
